@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(node index.js:*)",
+      "Bash(python -X utf8:*)"
+    ]
+  }
+}

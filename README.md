@@ -19,6 +19,28 @@ npm install
 
 ## 配置
 
+本工具支持三种配置方式，优先级从高到低为：**环境变量 > 用户配置文件 > .env 文件**
+
+### 方式一：用户配置文件（推荐）
+
+在用户主目录创建 `~/.tecent-cos-img-uploader.json` 文件：
+
+```json
+{
+  "secretId": "your_secret_id_here",
+  "secretKey": "your_secret_key_here",
+  "bucket": "your_bucket_name-1234567890",
+  "region": "ap-guangzhou"
+}
+```
+
+**优点**：
+- 全局配置，所有项目共享
+- 无需在每个项目中创建 `.env` 文件
+- 不会意外提交到版本控制系统
+
+### 方式二：.env 文件
+
 1. 复制配置文件模板：
 ```bash
 cp .env.example .env
@@ -31,6 +53,24 @@ COS_SECRET_ID=your_secret_id_here
 COS_SECRET_KEY=your_secret_key_here
 COS_BUCKET=your_bucket_name-1234567890
 COS_REGION=ap-guangzhou
+```
+
+### 方式三：环境变量
+
+直接设置环境变量（优先级最高）：
+
+```bash
+# Linux/Mac
+export COS_SECRET_ID=your_secret_id_here
+export COS_SECRET_KEY=your_secret_key_here
+export COS_BUCKET=your_bucket_name-1234567890
+export COS_REGION=ap-guangzhou
+
+# Windows (PowerShell)
+$env:COS_SECRET_ID="your_secret_id_here"
+$env:COS_SECRET_KEY="your_secret_key_here"
+$env:COS_BUCKET="your_bucket_name-1234567890"
+$env:COS_REGION="ap-guangzhou"
 ```
 
 ### 获取配置信息
@@ -179,10 +219,11 @@ async function example() {
 
 ## 注意事项
 
-1. 请妥善保管 `.env` 文件中的密钥信息，不要提交到版本控制系统
-2. 确保存储桶的访问权限配置正确
-3. 上传的文件URL格式为：`https://{bucket}.cos.{region}.myqcloud.com/{filename}`
-4. 建议在生产环境中使用临时密钥（STS）而非永久密钥
+1. 请妥善保管配置文件中的密钥信息，不要提交到版本控制系统
+2. 用户配置文件 `~/.tecent-cos-img-uploader.json` 存储在用户主目录，注意文件权限
+3. 确保存储桶的访问权限配置正确
+4. 上传的文件URL格式为：`https://{bucket}.cos.{region}.myqcloud.com/{filename}`
+5. 建议在生产环境中使用临时密钥（STS）而非永久密钥
 
 ## 许可证
 
